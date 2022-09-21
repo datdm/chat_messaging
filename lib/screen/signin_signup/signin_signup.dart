@@ -1,4 +1,5 @@
 import 'package:chat_messsaging/components/primary_button.dart';
+import 'package:chat_messsaging/screen/chats/chats_screen.dart';
 import 'package:chat_messsaging/shared/constants/constants.dart';
 import "package:flutter/material.dart";
 
@@ -10,17 +11,19 @@ class SignInSignUp extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: defaultPadding,),
+          padding: const EdgeInsets.symmetric(horizontal: defaultPadding,),
           child: Column(
             children: [
-              Spacer(flex: 3),
+              const Spacer(flex: 3),
               Image.asset("assets/img/logo_light.png", height: 146),
-              Spacer(),
+              const Spacer(),
               PrimaryButton(
                 text: "Sign In",
-                onPress: () {}
+                onPress: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const ChatsScreen()));
+                }
               ),
-              SizedBox(
+              const SizedBox(
                 height: defaultPadding * 1.5
               ),
               PrimaryButton(
@@ -28,7 +31,7 @@ class SignInSignUp extends StatelessWidget {
                 onPress: () {},
                 color: Theme.of(context).colorScheme.secondary,
               ),
-              Spacer(flex: 3)
+              const Spacer(flex: 3)
             ],
           ),
         )
