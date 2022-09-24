@@ -11,6 +11,14 @@ class ChatsScreen extends StatelessWidget {
     return Scaffold(
       appBar: buildAppBar(),
       body: const Body(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: primrayColor,
+        child: const Icon(
+          Icons.person_add_alt_1,
+          color: Colors.white,
+        ),
+      ),
     );
   }
 
