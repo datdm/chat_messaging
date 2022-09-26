@@ -3,8 +3,16 @@ import 'package:flutter/material.dart';
 
 import 'components/body.dart';
 
-class ChatsScreen extends StatelessWidget {
+class ChatsScreen extends StatefulWidget {
   const ChatsScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ChatsScreen> createState() => _ChatsScreenState();
+}
+
+class _ChatsScreenState extends State<ChatsScreen> {
+  // state
+  int _selectedIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +27,31 @@ class ChatsScreen extends StatelessWidget {
           color: Colors.white,
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _selectedIndex,
+        fixedColor: primrayColor,
+        onTap: (value) {
+          setState(() {
+            _selectedIndex = value;
+          });
+        },
+        backgroundColor: Colors.red,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.messenger),
+            label: "Chats",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people),
+            label: "People",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.call),
+            label: "Call"
+          )
+        ],
+      )
     );
   }
 
