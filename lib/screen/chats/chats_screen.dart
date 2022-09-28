@@ -27,31 +27,45 @@ class _ChatsScreenState extends State<ChatsScreen> {
           color: Colors.white,
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _selectedIndex,
-        fixedColor: primrayColor,
-        onTap: (value) {
-          setState(() {
-            _selectedIndex = value;
-          });
-        },
-        backgroundColor: Colors.red,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.messenger),
-            label: "Chats",
+      bottomNavigationBar: buildBottomNavigationBar()
+    );
+  }
+
+  BottomNavigationBar buildBottomNavigationBar() {
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      currentIndex: _selectedIndex,
+      // fixedColor: primrayColor,
+      onTap: (value) {
+        setState(() {
+          _selectedIndex = value;
+        });
+      },
+      backgroundColor: Colors.white,
+      selectedItemColor: contentColorLightTheme.withOpacity(0.7),
+      unselectedItemColor: contentColorLightTheme.withOpacity(0.32),
+      selectedIconTheme: const IconThemeData(color: primrayColor),
+      items: const [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.messenger),
+          label: "Chats",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.people),
+          label: "People",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.call),
+          label: "Call"
+        ),
+        BottomNavigationBarItem(
+          icon: CircleAvatar(
+            backgroundImage: AssetImage('assets/img/user_2.png'),
+            radius: 14,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.people),
-            label: "People",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.call),
-            label: "Call"
-          )
-        ],
-      )
+          label: "Profile"
+        )
+      ],
     );
   }
 
