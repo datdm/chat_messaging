@@ -1,7 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:chat_messsaging/models/ChatMessage.dart';
 import 'package:chat_messsaging/screen/message/components/message.dart';
 import 'package:chat_messsaging/shared/constants/constants.dart';
-import 'package:flutter/material.dart';
 import 'package:chat_messsaging/screen/message/components/chat_input_field.dart';
 
 class Body extends StatelessWidget {

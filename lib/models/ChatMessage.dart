@@ -36,6 +36,12 @@ List demeChatMessages = [
   ),
   ChatMessage(
     text: "",
+    messageType: ChatMessageType.audio,
+    messageStatus: MessageStatus.viewed,
+    isSender: true,
+  ),
+  ChatMessage(
+    text: "",
     messageType: ChatMessageType.video,
     messageStatus: MessageStatus.viewed,
     isSender: true,
