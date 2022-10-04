@@ -12,7 +12,7 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-         Container(
+        Container(
           padding: const EdgeInsets.fromLTRB(defaultPadding, 0, defaultPadding, defaultPadding * 0.5),
           color: primrayColor,
           child: Row(

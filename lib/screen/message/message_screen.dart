@@ -9,12 +9,12 @@ class MessageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: buildAppBar(context),
       body: const Body(),
     );
   }
 
-  AppBar buildAppBar() {
+  AppBar buildAppBar(BuildContext context) {
     return AppBar(
       backgroundColor: primrayColor,
       automaticallyImplyLeading: false,
@@ -26,7 +26,9 @@ class MessageScreen extends StatelessWidget {
             width: 18.0,
             child: IconButton(
               padding: const EdgeInsets.all(0),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               icon: const Icon(Icons.keyboard_arrow_left),
             ),
           ),
@@ -63,7 +65,8 @@ class MessageScreen extends StatelessWidget {
         IconButton(
           onPressed: () {},
           icon: const Icon(Icons.videocam)
-        )
+        ),
+        const SizedBox(width: defaultPadding / 2)
       ],
     );
   }
