@@ -1,6 +1,8 @@
 import 'package:chat_messsaging/models/ChatMessage.dart';
 import 'package:chat_messsaging/screen/message/components/audio_message.dart';
+import 'package:chat_messsaging/screen/message/components/message_status_dot.dart';
 import 'package:chat_messsaging/screen/message/components/text_message.dart';
+import 'package:chat_messsaging/screen/message/components/video_message.dart';
 import 'package:chat_messsaging/shared/constants/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +20,8 @@ class Message extends StatelessWidget {
         return TextMessage(message: message);
       case ChatMessageType.audio:
         return AudioMessage(message: message);
+      case ChatMessageType.video:
+        return VideoMessage(message: message);
       default:
         return const SizedBox();
     }
@@ -30,6 +34,7 @@ class Message extends StatelessWidget {
       child: Row(
         mainAxisAlignment:
           message.isSender ? MainAxisAlignment.end : MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           if (!message.isSender) ...{
             const CircleAvatar(
@@ -38,7 +43,8 @@ class Message extends StatelessWidget {
             ),
             const SizedBox(width: defaultPadding / 4)
           },
-          messageContaint(message)
+          messageContaint(message),
+          if (message.isSender) MessageStatusDot(status: message.messageStatus)
         ],
       ),
     );
