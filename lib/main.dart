@@ -1,3 +1,4 @@
+import 'package:chat_messsaging/helper/helper_function.dart';
 import 'package:chat_messsaging/screen/welcome/welcome_screen.dart';
 import 'package:chat_messsaging/shared/constants/firebase.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -22,15 +23,36 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool _isSignedIn = false;
+
+  @override
+  void initState() {
+    super.initState();
+    getUserLoggedInStatus();
+  }
+
+  getUserLoggedInStatus() async {
+    await HelperFunction.getUserLoggedInStatus().then((value) => {
+      if (value != null) {
+        _isSignedIn = value
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Chat Messaging',
       debugShowCheckedModeBanner: false,
-      home: WelcomeScreen(),
+      home: WelcomeScreen(isSignedIn: _isSignedIn),
     );
   }
 }
