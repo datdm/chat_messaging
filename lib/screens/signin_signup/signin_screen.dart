@@ -46,7 +46,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     labelText: "Email",
                     prefixIcon: const Icon(
                       Icons.email,
-                      color: Colors.red,
+                      color: primrayColor,
                     ),
                   ),
                   onChanged: (val) {
@@ -67,7 +67,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     labelText: "Password",
                     prefixIcon: const Icon(
                       Icons.lock,
-                      color: Colors.red,
+                      color: primrayColor,
                     ),
                   ),
                   onChanged: (val) {

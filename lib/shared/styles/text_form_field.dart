@@ -18,6 +18,11 @@ const inputDecoration = InputDecoration(
       color: primrayColor,
     )
   ),
+  focusedErrorBorder: OutlineInputBorder(
+    borderSide: BorderSide(
+      color: Colors.red,
+    )
+  ),
   errorBorder: OutlineInputBorder(
     borderSide: BorderSide(
       color: Colors.red,
