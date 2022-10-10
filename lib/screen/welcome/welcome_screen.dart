@@ -1,9 +1,10 @@
+import 'package:chat_messsaging/helper/helper_function.dart';
 import 'package:chat_messsaging/screen/chats/chats_screen.dart';
 import 'package:chat_messsaging/screen/signin_signup/signin_signup.dart';
 import 'package:chat_messsaging/shared/constants/constants.dart';
 import 'package:flutter/material.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({
     Key? key,
     required this.isSignedIn
@@ -11,6 +12,11 @@ class WelcomeScreen extends StatelessWidget {
 
   final bool isSignedIn;
 
+  @override
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,8 +46,7 @@ class WelcomeScreen extends StatelessWidget {
             FittedBox(
               child: TextButton(
                 onPressed: () {
-                  print(isSignedIn);
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => isSignedIn ? const ChatsScreen() : const SignInSignUp()));
+                  HelperFunction.gotoScreen(context, widget.isSignedIn ? const ChatsScreen() : const SignInSignUp());
                 },
                 child: Row(
                   children: [
