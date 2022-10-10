@@ -1,5 +1,5 @@
 import 'package:chat_messsaging/helper/helper_function.dart';
-import 'package:chat_messsaging/screen/welcome/welcome_screen.dart';
+import 'package:chat_messsaging/screens/welcome/welcome_screen.dart';
 import 'package:chat_messsaging/shared/constants/firebase.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';

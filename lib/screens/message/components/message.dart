@@ -1,8 +1,8 @@
 import 'package:chat_messsaging/models/ChatMessage.dart';
-import 'package:chat_messsaging/screen/message/components/audio_message.dart';
-import 'package:chat_messsaging/screen/message/components/message_status_dot.dart';
-import 'package:chat_messsaging/screen/message/components/text_message.dart';
-import 'package:chat_messsaging/screen/message/components/video_message.dart';
+import 'package:chat_messsaging/screens/message/components/audio_message.dart';
+import 'package:chat_messsaging/screens/message/components/message_status_dot.dart';
+import 'package:chat_messsaging/screens/message/components/text_message.dart';
+import 'package:chat_messsaging/screens/message/components/video_message.dart';
 import 'package:chat_messsaging/shared/constants/constants.dart';
 import 'package:flutter/material.dart';
 

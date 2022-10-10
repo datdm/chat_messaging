@@ -1,28 +1,26 @@
 import 'package:chat_messsaging/helper/helper_function.dart';
-import 'package:chat_messsaging/screen/signin_signup/signin_screen.dart';
+import 'package:chat_messsaging/screens/signin_signup/signup_screen.dart';
 import 'package:chat_messsaging/shared/constants/constants.dart';
 import 'package:chat_messsaging/shared/styles/text_form_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignInScreenState extends State<SignInScreen> {
   final formKey = GlobalKey<FormState>();
-
-  final String name = "";
-  final String email = "";
-  final String password = "";
+  String email = "";
+  String password = "";
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -35,7 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text(
-                  "Sign Up",
+                  "Sign In",
                   style: TextStyle(
                     fontSize: 24,
                     color: primrayColor,
@@ -43,21 +41,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 const SizedBox(height: 100),
-                TextFormField(
-                  decoration: inputDecoration.copyWith(
-                    labelText: "Full name",
-                    prefixIcon: const Icon(
-                      Icons.person,
-                      color: Colors.red,
-                    ),
-                  ),
-                  onChanged: (val) {
-                    setState(() {
-                      name: val;
-                    });
-                  },
-                ),
-                const SizedBox(height: 20),
                 TextFormField(
                   decoration: inputDecoration.copyWith(
                     labelText: "Email",
@@ -70,6 +53,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     setState(() {
                       email: val;
                     });
+                  },
+                  validator: (value) {
+                    return RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email)
+                      ? null
+                      : "Please enter a valid email!";
                   },
                 ),
                 const SizedBox(height: 20),
@@ -87,13 +75,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       password: val;
                     });
                   },
+                  validator: (val) {
+                    if (val!.length < 6) {
+                      return "Please must be at lease 6 character!";
+                    } else {
+                      return null;
+                    }
+                  },
                 ),
                 const SizedBox(height: 40),
                 SizedBox(
                   width: double.infinity,
                   height: 40,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        print(email);
+                        print(password);
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
                       primary: primrayColor,
@@ -105,7 +105,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       )
                     ),
                     child: const Text(
-                      "Sign Up",
+                      "Sign In",
                       style: TextStyle(
                         color: Colors.white,
                       ),
@@ -115,20 +115,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(height: 10),
                 Text.rich(
                   TextSpan(
-                    text: "Already have an account? ",
+                    text: "Don't have an account? ",
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 14,
                     ),
                     children: <TextSpan>[
                       TextSpan(
-                        text: "Login now",
+                        text: "Register here",
                         style: const TextStyle(
                           color: Colors.black,
                           decoration: TextDecoration.underline,
                         ),
                         recognizer: TapGestureRecognizer()..onTap = () {
-                          HelperFunction.gotoScreen(context, const SignInScreen());
+                          HelperFunction.gotoScreen(context, const SignUpScreen());
                         }
                       )
                     ]

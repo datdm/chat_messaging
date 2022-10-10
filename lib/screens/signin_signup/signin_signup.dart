@@ -1,7 +1,7 @@
 import 'package:chat_messsaging/components/primary_button.dart';
 import 'package:chat_messsaging/helper/helper_function.dart';
-import 'package:chat_messsaging/screen/signin_signup/signin_screen.dart';
-import 'package:chat_messsaging/screen/signin_signup/signup_screen.dart';
+import 'package:chat_messsaging/screens/signin_signup/signin_screen.dart';
+import 'package:chat_messsaging/screens/signin_signup/signup_screen.dart';
 import 'package:chat_messsaging/shared/constants/constants.dart';
 import "package:flutter/material.dart";
 
