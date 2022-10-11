@@ -46,7 +46,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             FittedBox(
               child: TextButton(
                 onPressed: () {
-                  HelperFunction.gotoScreen(context, widget.isSignedIn ? const ChatsScreen() : const SignInSignUp());
+                  HelperFunction.gotoNewScreen(context, widget.isSignedIn ? const ChatsScreen() : const SignInSignUp());
                 },
                 child: Row(
                   children: [

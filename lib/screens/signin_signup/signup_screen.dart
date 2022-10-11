@@ -1,5 +1,7 @@
 import 'package:chat_messsaging/helper/helper_function.dart';
+import 'package:chat_messsaging/screens/chats/chats_screen.dart';
 import 'package:chat_messsaging/screens/signin_signup/signin_screen.dart';
+import 'package:chat_messsaging/services/auth_service.dart';
 import 'package:chat_messsaging/shared/constants/constants.dart';
 import 'package:chat_messsaging/shared/styles/text_form_field.dart';
 import 'package:flutter/gestures.dart';
@@ -15,10 +17,12 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final formKey = GlobalKey<FormState>();
 
+  AuthService authService = AuthService();
+
   bool _isLoading = false;
-  final String name = "";
-  final String email = "";
-  final String password = "";
+  String name = "admin";
+  String email = "admin@gmail.com";
+  String password = "123456";
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +30,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: _isLoading
-          ? const CircularProgressIndicator(
-              color: primrayColor,
+          ? const Center(
+              child: CircularProgressIndicator(
+                color: primrayColor,
+              ),
             )
           : Padding(
             padding: const EdgeInsets.symmetric(
@@ -56,9 +62,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         color: primrayColor,
                       ),
                     ),
+                    initialValue: name,
                     onChanged: (val) {
                       setState(() {
-                        name: val;
+                        name = val;
                       });
                     },
                     validator: (val) {
@@ -78,13 +85,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         color: primrayColor,
                       ),
                     ),
+                    initialValue: email,
                     onChanged: (val) {
                       setState(() {
-                        email: val;
+                        email = val;
                       });
                     },
                     validator: (value) {
-                      return RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email)
+                      return RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value!)
                         ? null
                         : "Please enter a valid email!";
                     },
@@ -99,9 +107,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         color: primrayColor,
                       ),
                     ),
+                    initialValue: password,
                     onChanged: (val) {
                       setState(() {
-                        password: val;
+                        password = val;
                       });
                     },
                     validator: (val) {
@@ -168,11 +177,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  signup() {
+  signup() async {
     if (formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
       });
+      
+      await authService
+        .signupUserWithEmailAndPassword(name, email, password)
+        .then((value) async {
+          if (value == true) {
+            await HelperFunction.saveUserLoggedInStatus(true);
+            await HelperFunction.saveUserEmail(email);
+            await HelperFunction.saveUserName(name);
+
+            HelperFunction.gotoNewScreen(context, const ChatsScreen());
+          } else {
+            setState(() {
+              _isLoading = false;
+            });
+          }
+        });
     }
   }
 }

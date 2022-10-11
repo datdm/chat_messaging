@@ -31,7 +31,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool _isSignedIn = false;
+  bool isSignedIn = false;
 
   @override
   void initState() {
@@ -42,7 +42,9 @@ class _MyAppState extends State<MyApp> {
   getUserLoggedInStatus() async {
     await HelperFunction.getUserLoggedInStatus().then((value) => {
       if (value != null) {
-        _isSignedIn = value
+        setState(() {
+          isSignedIn = value;
+        })
       }
     });
   }
@@ -52,7 +54,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Chat Messaging',
       debugShowCheckedModeBanner: false,
-      home: WelcomeScreen(isSignedIn: _isSignedIn),
+      home: WelcomeScreen(isSignedIn: isSignedIn),
     );
   }
 }
