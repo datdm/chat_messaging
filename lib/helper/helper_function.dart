@@ -32,6 +32,11 @@ class HelperFunction {
     return prefs.getString(userNameKey);
   }
 
+  static Future<String?> getUserEmail() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(userEmailInKey);
+  }
+
   static gotoScreen(context, page) {
     Navigator.push(context, MaterialPageRoute(builder: (_) => page));
   }

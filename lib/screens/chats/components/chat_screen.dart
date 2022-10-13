@@ -5,9 +5,14 @@ import 'package:chat_messsaging/screens/message/message_screen.dart';
 import 'package:chat_messsaging/shared/constants/constants.dart';
 import 'package:flutter/material.dart';
 
-class Body extends StatelessWidget {
-  const Body({Key? key}) : super(key: key);
+class ChatScreen extends StatefulWidget {
+  const ChatScreen({Key? key}) : super(key: key);
 
+  @override
+  State<ChatScreen> createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(

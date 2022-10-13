@@ -1,10 +1,11 @@
 import 'package:chat_messsaging/helper/helper_function.dart';
+import 'package:chat_messsaging/screens/chats/components/profile_screen.dart';
 import 'package:chat_messsaging/screens/signin_signup/signin_signup.dart';
 import 'package:chat_messsaging/services/auth_service.dart';
 import 'package:chat_messsaging/shared/constants/constants.dart';
 import 'package:flutter/material.dart';
 
-import 'components/body.dart';
+import 'components/chat_screen.dart';
 
 class ChatsScreen extends StatefulWidget {
   const ChatsScreen({Key? key}) : super(key: key);
@@ -17,6 +18,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
   // state
   int _selectedIndex = 0;
   String name = "";
+  String email = "";
 
   AuthService auth = AuthService();
 
@@ -32,21 +34,28 @@ class _ChatsScreenState extends State<ChatsScreen> {
         name = value!;
       });
     });
+    await HelperFunction.getUserEmail().then((value) {
+      setState(() {
+        email = value!;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: const Body(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: primrayColor,
-        child: const Icon(
-          Icons.person_add_alt_1,
-          color: Colors.white,
-        ),
-      ),
+      body: buildBody(),
+      floatingActionButton: _selectedIndex == 0
+        ? FloatingActionButton(
+            onPressed: () {},
+            backgroundColor: primrayColor,
+            child: const Icon(
+              Icons.person_add_alt_1,
+              color: Colors.white,
+            ),
+          )
+        : null,
       bottomNavigationBar: buildBottomNavigationBar(),
       drawer: Drawer(
         child: ListView(
@@ -80,6 +89,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
               selected: true,
               onTap: () {
                 showDialog(
+                  barrierDismissible: false,
                   context: context,
                   builder: (context) {
                     return AlertDialog(
@@ -153,14 +163,44 @@ class _ChatsScreenState extends State<ChatsScreen> {
     return AppBar(
       backgroundColor: primrayColor,
       elevation: 0,
-      title: const Text("Chats"),
+      title: buildTitle(),
       // automaticallyImplyLeading: false,
       actions: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.search)
-        )
+        if (_selectedIndex == 0)
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.search)
+          )
       ],
     );
+  }
+
+  Widget? buildBody() {
+    switch (_selectedIndex) {
+      case 0:
+        return const ChatScreen();
+      case 3:
+        return ProfileScreen(
+          fullname: name,
+          email: email,
+        );
+      default:
+        return null;
+    }
+  }
+
+  Text buildTitle() {
+    switch (_selectedIndex) {
+      case 0:
+        return const Text("Chats");
+      case 1:
+        return const Text("People");
+      case 2:
+        return const Text("Call");
+      case 3:
+        return const Text("Profile");
+      default:
+        return const Text("Chats");
+    }
   }
 }
