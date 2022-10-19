@@ -27,4 +27,8 @@ class DatabaseService {
     QuerySnapshot snapshot = await query.get();
     return snapshot;
   }
+
+  Future getUsers() async {
+    return userCollection.doc(uid).snapshots();
+  }
 }
