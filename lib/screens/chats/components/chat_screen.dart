@@ -1,11 +1,10 @@
 import 'package:chat_messsaging/components/fill_outline_button.dart';
-import 'package:chat_messsaging/models/Chat.dart';
-import 'package:chat_messsaging/screens/chats/components/chat_card.dart';
-import 'package:chat_messsaging/screens/message/message_screen.dart';
+import 'package:chat_messsaging/models/MyChartProxyProvider.dart';
 import 'package:chat_messsaging/services/database_service.dart';
 import 'package:chat_messsaging/shared/constants/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -64,15 +63,16 @@ class _ChatScreenState extends State<ChatScreen> {
             stream: users,
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
-                if (snapshot.data['groups'] != null) {
-                  if (snapshot.data['groups'].length != 0) {
-                    return const Center(child: Text("Has Data"));
-                  } else {
-                    return noDataWidget();
-                  }
-                } else {
-                  return noDataWidget();
-                }
+                // if (snapshot.data['groups'] != null) {
+                //   if (snapshot.data['groups'].length != 0) {
+                //     return const Center(child: Text("Has Data"));
+                //   } else {
+                //     return noDataWidget();
+                //   }
+                // } else {
+                //   return noDataWidget();
+                // }
+                return noDataWidget();
               } else {
                 return noDataWidget();
               }
@@ -154,7 +154,37 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
           const SizedBox(height: 20),
-          const Text("You haven't a message!")
+          const Text("You haven't a message!"),
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: defaultPadding,
+              vertical: defaultPadding,
+            ),
+            color: Colors.white,
+            child: Consumer<MyChartProxyProvider1>(
+              builder: (context, value, child) {
+                return ElevatedButton(
+                  onPressed: () {
+                    value.something();
+                  },
+                  child: Text(value.chart),
+                );
+              },
+            ),
+          ),
+          Container(
+            color: Colors.white,
+            child: Consumer<MyChartProxyProvider2>(
+              builder: (context, value, child) {
+                return ElevatedButton(
+                  onPressed: () {
+                    value.something2();
+                  },
+                  child: const Text("value.chart")
+                );
+              },
+            ),
+          )
         ],
       )
     );
